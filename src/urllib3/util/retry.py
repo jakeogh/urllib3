@@ -3,6 +3,7 @@ import time
 import logging
 from collections import namedtuple
 from itertools import takewhile
+from icecream import ic
 import email
 import re
 
@@ -275,6 +276,7 @@ class Retry(object):
     def sleep_for_retry(self, response=None):
         retry_after = self.get_retry_after(response)
         if retry_after:
+            ic(retry_after)
             time.sleep(retry_after)
             return True
 
@@ -284,6 +286,7 @@ class Retry(object):
         backoff = self.get_backoff_time()
         if backoff <= 0:
             return
+        ic(backoff)
         time.sleep(backoff)
 
     def sleep(self, response=None):
