@@ -427,7 +427,7 @@ class HTTPResponse(io.IOBase):
             except SocketTimeout:
                 # FIXME: Ideally we'd like to include the url in the ReadTimeoutError but
                 # there is yet no clean way to get at it from this context.
-                raise ReadTimeoutError(self._pool, None, "eRead timed out.")
+                raise ReadTimeoutError(self._pool, None, "SocketTimeout eRead timed out.")
 
             except BaseSSLError as e:
                 # FIXME: Is there a better way to differentiate between SSLErrors?
