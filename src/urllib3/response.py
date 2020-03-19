@@ -5,6 +5,7 @@ import io
 import logging
 from socket import timeout as SocketTimeout
 from socket import error as SocketError
+from icecream import ic
 
 try:
     import brotli
@@ -257,6 +258,9 @@ class HTTPResponse(io.IOBase):
         if preload_content and not self._body:
             self._body = self.read(decode_content=decode_content)
 
+        ic(self.retries)
+        ic(self.auto_close)
+
     def get_redirect_location(self):
         """
         Should we redirect and where to?
@@ -498,6 +502,8 @@ class HTTPResponse(io.IOBase):
         fp_closed = getattr(self._fp, "closed", False)
 
         with self._error_catcher():
+            ic(amt)
+            ic(cache_content)
             if amt is None:
                 # cStringIO doesn't like amt=None
                 data = self._fp.read() if not fp_closed else b""
