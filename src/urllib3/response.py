@@ -502,8 +502,8 @@ class HTTPResponse(io.IOBase):
         fp_closed = getattr(self._fp, "closed", False)
 
         with self._error_catcher():
-            ic(amt)
-            ic(cache_content)
+            ic(amt)  #128
+            #ic(cache_content)  # false
             if amt is None:
                 # cStringIO doesn't like amt=None
                 data = self._fp.read() if not fp_closed else b""
