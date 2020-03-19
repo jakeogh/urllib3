@@ -191,6 +191,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
 
         self.timeout = timeout
         self.retries = retries
+        ic(self.retries)
 
         self.pool = self.QueueCls(maxsize)
         self.block = block
@@ -608,6 +609,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
 
         if not isinstance(retries, Retry):
             retries = Retry.from_int(retries, redirect=redirect, default=self.retries)
+        ic(retries)
 
         if release_conn is None:
             release_conn = response_kw.get("preload_content", True)
@@ -660,7 +662,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
             conn = self._get_conn(timeout=pool_timeout)
 
             conn.timeout = timeout_obj.connect_timeout
-
+            ic(conn.timeout)
             is_new_proxy_conn = self.proxy is not None and not getattr(
                 conn, "sock", None
             )
