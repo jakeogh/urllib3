@@ -395,6 +395,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
 
         # App Engine doesn't have a sock attr
         if getattr(conn, "sock", None):
+            ic(conn)
             # In Python 3 socket.py will catch EAGAIN and return None when you
             # try and read into the file pointer created by http.client, which
             # instead raises a BadStatusLine exception. Instead of catching
