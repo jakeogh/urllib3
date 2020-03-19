@@ -4,6 +4,7 @@ from __future__ import absolute_import
 # specified by the user
 from socket import _GLOBAL_DEFAULT_TIMEOUT
 import time
+from icecream import ic
 
 from ..exceptions import TimeoutStateError
 
@@ -253,9 +254,13 @@ class Timeout(object):
         ):
             # In case the connect timeout has not yet been established.
             if self._start_connect is None:
+                ic(self._read)
                 return self._read
+            ic(max(0, min(self.total - self.get_connect_duration(), self._read)))
             return max(0, min(self.total - self.get_connect_duration(), self._read))
         elif self.total is not None and self.total is not self.DEFAULT_TIMEOUT:
+            ic(max(0, self.total - self.get_connect_duration()))
             return max(0, self.total - self.get_connect_duration())
         else:
+            ic(self._read)
             return self._read
