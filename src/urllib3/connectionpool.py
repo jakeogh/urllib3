@@ -332,14 +332,14 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
 
         if isinstance(err, SocketTimeout):
             raise ReadTimeoutError(
-                self, url, "Read timed out. (a read timeout=%s)" % timeout_value
+                self, url, "aRead timed out. (read timeout=%s)" % timeout_value
             )
 
         # See the above comment about EAGAIN in Python 3. In Python 2 we have
         # to specifically catch it and throw the timeout error
         if hasattr(err, "errno") and err.errno in _blocking_errnos:
             raise ReadTimeoutError(
-                self, url, "Read timed out. (b read timeout=%s)" % timeout_value
+                self, url, "bRead timed out. (read timeout=%s)" % timeout_value
             )
 
         # Catch possible read timeouts thrown as SSL errors. If not the
@@ -349,7 +349,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
             err
         ):  # Python < 2.7.4
             raise ReadTimeoutError(
-                self, url, "Read timed out. (c read timeout=%s)" % timeout_value
+                self, url, "cRead timed out. (read timeout=%s)" % timeout_value
             )
 
     def _make_request(
@@ -404,7 +404,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
             # timeouts, check for a zero timeout before making the request.
             if read_timeout == 0:
                 raise ReadTimeoutError(
-                    self, url, "Read timed out. (d read timeout=%s)" % read_timeout
+                    self, url, "dRead timed out. (read timeout=%s)" % read_timeout
                 )
             if read_timeout is Timeout.DEFAULT_TIMEOUT:
                 conn.sock.settimeout(socket.getdefaulttimeout())
