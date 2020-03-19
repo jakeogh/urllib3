@@ -200,6 +200,8 @@ class PoolManager(RequestMethods):
         """
         pool_cls = self.pool_classes_by_scheme[scheme]
         ic(pool_cls)
+        ic(pool_cls.retries)
+        ic(pool_cls.timeout)
         if request_context is None:
             request_context = self.connection_pool_kw.copy()
 
