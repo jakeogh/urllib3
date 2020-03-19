@@ -6,7 +6,7 @@ import warnings
 
 from socket import error as SocketError, timeout as SocketTimeout
 import socket
-
+from icecream import ic
 
 from .exceptions import (
     ClosedPoolError,
@@ -324,6 +324,10 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
             return Timeout.from_float(timeout)
 
     def _raise_timeout(self, err, url, timeout_value):
+        ic()
+        ic(err)
+        ic(url)
+        ic(timeout_value)
         """Is the error actually a timeout? Will raise a ReadTimeout or pass"""
 
         if isinstance(err, SocketTimeout):
