@@ -19,6 +19,7 @@ from .packages.six.moves.urllib.parse import urljoin
 from .request import RequestMethods
 from .util.url import parse_url
 from .util.retry import Retry
+from icecream import ic
 
 
 __all__ = ["PoolManager", "ProxyManager", "proxy_from_url"]
@@ -198,6 +199,7 @@ class PoolManager(RequestMethods):
         companion methods. It is intended to be overridden for customization.
         """
         pool_cls = self.pool_classes_by_scheme[scheme]
+        ic(pool_cls)
         if request_context is None:
             request_context = self.connection_pool_kw.copy()
 
