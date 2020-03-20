@@ -191,7 +191,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
 
         self.timeout = timeout
         self.retries = retries
-        ic(self.retries)
+        #ic(self.retries)  # not populated with real retry values yet
 
         self.pool = self.QueueCls(maxsize)
         self.block = block
